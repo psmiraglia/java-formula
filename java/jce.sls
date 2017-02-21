@@ -1,8 +1,4 @@
 {% from 'java/map.jinja' import java_settings with context %}
-
-include:
-  - java.install
-
 {% set curl_opts = '-b oraclelicense=accept-securebackup-cookie -L -s' %}
 {% set zip_file = '/tmp/jce.zip' %}
 
@@ -23,14 +19,12 @@ extract_jce_zip:
   file.managed:
     - source: file:///tmp/{{ java_settings.jce.name }}/local_policy.jar
     - require:
-      - sls: java.install
       - archive: extract_jce_zip
 
 {{ java_settings.env.java_home }}/jre/lib/security/US_export_policy.jar:
   file.managed:
     - source: file:///tmp/{{ java_settings.jce.name }}/US_export_policy.jar
     - require:
-      - sls: java.install
       - archive: extract_jce_zip
 
 {{ zip_file }}:
