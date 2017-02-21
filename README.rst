@@ -15,10 +15,15 @@ Available states
 .. contents::
     :local:
 
-``java.install``
-----------------
+``java.jdk``
+------------
 
-It installs Oracle Java from tarball.
+It installs Oracle Java Development Kit from tarball.
+
+``java.jre``
+------------
+
+It installs Oracle Java Runtime Environment from tarball.
 
 ``java.jce``
 ------------
