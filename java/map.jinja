@@ -1,0 +1,22 @@
+{% import_yaml "java/defaults.yaml" as default_settings %}
+
+
+{% set os_family_map = salt['grains.filter_by']({
+        'Debian': {},
+        'Suse': {},
+        'Arch': {},
+        'RedHat': {},
+    },
+    grain="os_family",
+    merge=salt['pillar.get']('java:lookup'))
+%}
+
+{% do default_settings.java.update(os_family_map) %}
+
+{% set java_settings = salt['pillar.get'](
+        'java',
+        default=default_settings.java,
+        merge=True
+    )
+%}
+
